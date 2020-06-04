@@ -1,0 +1,29 @@
+<main>
+  <section class="main-content">
+    <h1>TODO List</h1>
+    <p class="about">A place to store your todos</p>
+    <form class="form">
+      <input class="input" type="text" name="filter" placeholder="Filter your to-dos" />
+    </form>
+    <ol class="ordered-list">
+      <li class="list-item" *ngFor="let item of todos; index as i">
+        <div class="item-container">
+          <!--if item.completed is false, then show the element (button) condition is item.completed or if that property equals false -->
+          <button *ngIf="!item.completed" class="complete-btn" (click)=complete(i)>
+            Complete
+          </button>
+          <!-- [ngClass] directive adds class of completed (strike through) if item.completed is true -->
+          <p class="task" [ngClass]="{ completed: item.completed }">
+            {{ item.task }}
+          </p>
+          <button (click)=delete(i)>X</button>
+          <!-- <button (click)="deleteTodo(item.id)">X</button> -->
+        </div>
+      </li>
+    </ol>
+    <form class="form" #todoForm="ngForm" (ngSubmit)=addTodo(todoForm)>
+      <input class="input" type="text" name="task" placeholder="Add your to-do" ngModel />
+      <button class="add-btn">Add</button>
+    </form>
+  </section>
+</main>
