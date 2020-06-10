@@ -18,9 +18,15 @@ routes.post("/todo", (request, response) => {
     })
 });
 
-routes.delete("/todo", (request, response) => {
+routes.put("/todo/:id", (req, res) => {
+    pool.query("UPDATE tasks SET completed=$1::boolean WHERE id=$2::int", [req.body.completed, req.params.id]).then(() => {
+        res.json(req.body);
+    })
+});
+
+routes.delete("/todo/:id", (request, response) => {
     pool.query("DELETE FROM tasks WHERE id=$1::int", [request.params.id]).then(() => {
-        response.sendStatus(200).json(`${request.params.id}`);
+        response.json(`${request.params.id}`);
     });
 })
 

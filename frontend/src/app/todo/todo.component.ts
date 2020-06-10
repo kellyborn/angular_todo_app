@@ -10,7 +10,7 @@ import { TodosService } from '../todos.service';
 })
 export class TodoComponent implements OnInit {
 
-  showIndex: number = null;
+  // showIndex: number = null;
   todos: Todo[] = [];
 
   constructor(private service: TodosService) { }
@@ -19,18 +19,18 @@ export class TodoComponent implements OnInit {
     this.getAllItems();
   }
 
-  delete(index: number): void {
-    this.todos.splice(index, 1)
-  }
+  // delete(index: number): void {
+  //   this.todos.splice(index, 1)
+  // }
 
-  complete(index: number): void {
-    this.todos[index].completed = true
-  }
+  // complete(index: number): void {
+  //   this.todos[index].completed = true
+  // }
 
-  getAllItems() {
+  getAllItems(): void {
     this.service.getAllItems().subscribe(response => {
       this.todos = response;
-      console.log(this.todos)
+      console.log(response)
     })
   }
 
@@ -49,12 +49,12 @@ export class TodoComponent implements OnInit {
     })
   }
 
-  updateTodo(form: NgForm, todo: Todo): void {
+  updateTodo(todo: Todo): void {
     let updateTodo = todo;
-    updateTodo.completed = form.value.completed;
+    updateTodo.completed = true;
     this.service.updateTodo(todo.id, updateTodo).subscribe(() => {
       this.getAllItems();
-      this.showIndex = null;
+      // this.showIndex = null;
     })
   }
 

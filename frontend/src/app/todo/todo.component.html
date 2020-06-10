@@ -9,15 +9,15 @@
       <li class="list-item" *ngFor="let item of todos; index as i">
         <div class="item-container">
           <!--if item.completed is false, then show the element (button) condition is item.completed or if that property equals false -->
-          <button *ngIf="!item.completed" class="complete-btn" (click)=complete(i)>
+          <button *ngIf="!item.completed" class="complete-btn" (click)="updateTodo(item)">
             Complete
           </button>
           <!-- [ngClass] directive adds class of completed (strike through) if item.completed is true -->
           <p class="task" [ngClass]="{ completed: item.completed }">
             {{ item.task }}
           </p>
-          <button (click)=delete(i)>X</button>
-          <!-- <button (click)="deleteTodo(item.id)">X</button> -->
+          <!-- <button (click)=delete(i)>X</button> -->
+          <button (click)="deleteTodo(item.id)">X</button>
         </div>
       </li>
     </ol>
